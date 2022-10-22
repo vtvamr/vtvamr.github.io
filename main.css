@@ -66,19 +66,19 @@ a[href*='//'] {
   color: #2080EF;
 }
 
-a:link {
+a:link:not(.topnav a):link {
   text-decoration: underline;
 }
 
-a:visited {
+a:visited:not(.topnav a):visited {
   text-decoration: underline;
 }
 
-a:hover {
+a:hover:not(.topnav a):hover {
   text-decoration: none;
 }
 
-a:active {
+a:active:not(.topnav a):active {
   text-decoration: underline;
 }
 
