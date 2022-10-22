@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Personal website of PD Dr. rer. nat. Stefan Zellmann -- Computer Graphics Research in Cologne</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="main.js"></script>
+<script>
+function setupPage()
+{
+    var pageid = queryGET("pageid");
+    if (!pageid)
+        pageid = "home";
+
+    document.getElementById(pageid + "main").style.display = "block"
+
+    // if (!isMobileBrowser())
+    // {
+    //     document.getElementById("mob_" + pageid).className = "active";
+    //     document.getElementById("topnavdesktop").style.display = "none";
+    //     document.getElementById("footer").style.width = "480px";
+    // }
+    // else
+    // {
+    //     document.getElementById(pageid).className = "active";
+    //     document.getElementById("topnavmobile").style.display = "none";
+    // }
+    document.getElementById(pageid).className = "active";
+    document.getElementById("topnavmobile").style.display = "none";
+}
+
+</script>
+</head>
+<body onload="setupPage()">
+
+<!--<div class="mobile-container">-->
+
+<!-- desktop navigation -->
+<div class="topnav" id="topnavdesktop" style="display: block">
+    <a href="index.html?pageid=home" id="home">Home</a>
+    <a href="index.html?pageid=publ" id="publ">Publications</a>
+    <a href="index.html?pageid=code" id="code">Sample Codes</a>
+    <a href="index.html?pageid=vis_" id="vis_">Visualizations</a>
+    <a href="index.html?pageid=cont" id="cont">Contact</a>
+</div>
+
+<!-- mobile navigation -->
+<div class="topnav" id="topnavmobile" style="display: block"-->
+    <!-- Navigation links (hidden by default) -->
+    <!--a href="index.html?pageid=home" id="mob_home" class="active">Home</a-->
+    <div id="menulinks">
+        <a href="index.html?pageid=home" id="mob_home">Home</a>
+        <a href="index.html?pageid=publ" id="mob_publ">Publications</a>
+        <a href="index.html?pageid=code" id="mob_publ">Sample Codes</a>
+        <a href="index.html?pageid=vis_" id="mob_publ">Visualizations</a>
+        <a href="index.html?pageid=cont" id="mob_cont">Contact</a>
+    </div>
+    <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+    <!--a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a-->
+</div>
+
+<!-- main area -->
+
+<!-- HOME -->
+<div class="mainarea" id="homemain">
+
+    <div class="title2">VTV-AMR (Website onder construction):<br />Visualization of Time-Varying Adaptive Mesh Refinement Data</div>
+    <br />
+    <div class="title3">Project Scope</div>
+    <br />
+    <div class="text">
+Adaptive mesh refinement (AMR) is used by 3D computational fluid dynamic (CFD)
+solvers to focus the computation on interesting areas. Popular AMR codes are
+NASA's
+<a href="https://www.nas.nasa.gov/publications/articles/feature_LAVA_contributes_to_astronaut_safety.html">LAVA</a>
+fluid solver or
+<a href="https://flash.rochester.edu/site/flashcode/">FLASH</a> by the University of Rochester.
+Examples of AMR <i>topologies</i> are <a href="https://en.wikipedia.org/wiki/Octree">Octrees</a>,
+but other tree types, branching factors, shapes, etc. are possible.
+<br />
+<br />
+AMR codes virtually always store the data (density, temperature, velocities, etc.) at the "cell centers".
+For that, imagine the cell to be a small box. "Vertex-centric" methods associate the data with
+the box corners, while "cell-centric" means the data is stored at the center of the box.
+Efficient and high-quality visualizations usually have to reconstruct the data at arbitrary sample points
+and for that need to be able to quickly identify <i>rectangular</i> neighborhoods.
+<div style="text-align: center; margin-top: 20px; margin-bottom: 30px;">
+<img src="img/problem.png" width="600"/>
+</div>
+In (a), with vertex-centric data, this is simple, as when we move up/down, left/right,
+from front to back, we eventually find the <i>nearest</i> data points for the sample position
+to form a rectangular region. In (b), with cell-centric data, finding that neighborhood
+is non-obvious even in the simplest of cases, and has led to visualization packages such
+as <a href="https://www.ospray.org/">OSPRay</a> to incorporate complicated
+auxiliary data structures to perform <i>cell location</i>. Other visualization packages
+support this kind of data, but don't effectively handle the "level boundaries" where cells
+of different sizes connect, and produce cracks and other artifacts when
+<a href="https://en.wikipedia.org/wiki/Isosurface">isosurfaces</a>
+or
+<a href="https://en.wikipedia.org/wiki/Volume_rendering">volume renderings</a>
+are generated from this kind of data.
+<br />
+<br />
+In VTV-AMR, <b>our focus</b> is on crack-free visualizations with
+state-of-the-art GPU ray tracing technology to produce high-quality renderings,
+and hence we have to use the aforementioned auxiliary data structures;
+unfortunately, the memory footprint and construction times of such data
+structures are not targeted at real-time performance, nor at time-varying data
+comprised of multiple simulation time steps with adaptively changing AMR grids.
+<br />
+<br />
+<b>Our contributions</b> will advance the state-of-the-art in high-quality AMR
+data reconstruction of cell-centric data on GPUs to interactively visualize
+data sets composed of 100s to 1000s of time steps. We focus on data where even
+single time steps saturate most of the available GPU memory. For that, we build
+on state-of-the-art
+<a href="https://github.com/owl-project/owlExaBrick">software solutions</a>
+that were recently published in
+<a href="https://ieeexplore.ieee.org/document/9222372">
+leading internation research journals</a>, and that we will extend to
+support time-varying data.
+<br />
+<br />
+Finally, here are some nice visualizations that we can already create with our software.
+For more of these, check out the <a href="index.html?pageid=vis_">Visualizations</a> subpage.
+<div style="text-align: center; margin-top: 20px; margin-bottom: 30px;">
+<img src="img/exajet-pathtraced_thumbnail.jpg" height="200" />
+<img src="img/cloud_thumbnail.jpg" height="200" />
+</div>
+The "<a href="https://data.nas.nasa.gov/exajet/">NASA exajet</a>" data set is courtesy Pat Moran.
+The molecular cloud data set is reused with friendly permission by Daniel Seifried with the
+Theoretical Astrophysics Group of the University of Cologne.
+<br />
+<br />
+<br />
+<br />
+
+    </div>
+</div>
+
+<!-- PUBLICATIONS -->
+<div class="mainarea" id="publmain">
+
+</div>
+
+<!-- SAMPLE CODES -->
+<div class="mainarea" id="codemain">
+
+</div>
+
+<!-- VISUALIZATIONS -->
+<div class="mainarea" id="vis_main">
+
+</div>
+
+<!-- CONTACT -->
+<div class="mainarea" id="contmain">
+    <div class="mainareatitle">
+        Contact
+    </div>
+    <br />
+    <table style="border: 0px">
+    <tr>
+        <td>E-Mail:</td>
+        <td><a href="javascript:window.location.href = 'mailto:' + ['zellmann','uni-koeln.de'].join('@')">zellmann<!---->@<!---->uni-koeln.de</a></td>
+    </tr>
+    </table>
+</div>
+
+<div class="footer" id="footer">
+&copy; Stefan Zellmann, with the University of Cologne (2022-2025)
+</div>
+
+<!--</div>  mobile container -->
+
+</body>
+</html>
