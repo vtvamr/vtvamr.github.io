@@ -66,6 +66,10 @@ a[href*='//'] {
   color: #2080EF;
 }
 
+a[href*='mailto'] {
+  color: #2080EF;
+}
+
 a:link:not(.topnav a):link {
   text-decoration: underline;
 }
