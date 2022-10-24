@@ -27,7 +27,10 @@ function setupPage()
     //     document.getElementById("topnavmobile").style.display = "none";
     // }
     document.getElementById(pageid).className = "active";
-    document.getElementById("topnavmobile").style.display = "none";
+    // document.getElementById("topnavmobile").style.display = "none";
+
+    if (pageid === 'vis_')
+        document.getElementById('youtube0').src = "https://www.youtube.com/embed/b7pgenL4hNo";
 }
 
 </script>
@@ -253,7 +256,7 @@ Exajet (courtesy Pat Moran with NASA) has a fixed AMR grid that doesn't change o
 With that, it's different than other data we focus on; this however allowed us to focus
 on the async. streaming procedere from NVMe SSD to GPU. The scalar data of each
 frame is 2.54 GB in size; all the renderings in the video are interactive.
-    <iframe width="420" height="315" src="https://www.youtube.com/embed/b7pgenL4hNo"></iframe>
+    <iframe id="youtube0" width="420" height="315" src=""></iframe>
     <br />
     <br />
     <div class="title3">Particle Tracer</div>
