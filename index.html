@@ -1,56 +1,57 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Personal website of PD Dr. rer. nat. Stefan Zellmann -- Computer Graphics Research in Cologne</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="main.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="main.js"></script>
-<script>
-function setupPage()
-{
-    var pageid = queryGET("pageid");
-    if (!pageid)
-        pageid = "home";
+    <title>Personal website of PD Dr. rer. nat. Stefan Zellmann -- Computer Graphics Research in Cologne</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="main.js"></script>
+    <script>
+        function setupPage() {
+            var pageid = queryGET("pageid");
+            if (!pageid)
+                pageid = "home";
 
-    document.getElementById(pageid + "main").style.display = "block"
+            document.getElementById(pageid + "main").style.display = "block"
 
-    // if (!isMobileBrowser())
-    // {
-    //     document.getElementById("mob_" + pageid).className = "active";
-    //     document.getElementById("topnavdesktop").style.display = "none";
-    //     document.getElementById("footer").style.width = "480px";
-    // }
-    // else
-    // {
-    //     document.getElementById(pageid).className = "active";
-    //     document.getElementById("topnavmobile").style.display = "none";
-    // }
-    document.getElementById(pageid).className = "active";
-    // document.getElementById("topnavmobile").style.display = "none";
+            // if (!isMobileBrowser())
+            // {
+            //     document.getElementById("mob_" + pageid).className = "active";
+            //     document.getElementById("topnavdesktop").style.display = "none";
+            //     document.getElementById("footer").style.width = "480px";
+            // }
+            // else
+            // {
+            //     document.getElementById(pageid).className = "active";
+            //     document.getElementById("topnavmobile").style.display = "none";
+            // }
+            document.getElementById(pageid).className = "active";
+            // document.getElementById("topnavmobile").style.display = "none";
 
-    if (pageid === 'vis_')
-        document.getElementById('youtube0').src = "https://www.youtube.com/embed/b7pgenL4hNo";
-}
+            if (pageid === 'vis_')
+                document.getElementById('youtube0').src = "https://www.youtube.com/embed/b7pgenL4hNo";
+        }
 
-</script>
+    </script>
 </head>
+
 <body onload="setupPage()">
 
-<!--<div class="mobile-container">-->
+    <!--<div class="mobile-container">-->
 
-<!-- desktop navigation -->
-<div class="topnav" id="topnavdesktop" style="display: block">
-    <a href="index.html?pageid=home" id="home">Home</a>
-    <a href="index.html?pageid=publ" id="publ">Publications</a>
-    <a href="index.html?pageid=code" id="code">Sample Codes</a>
-    <a href="index.html?pageid=vis_" id="vis_">Visualizations</a>
-    <a href="index.html?pageid=ppl_" id="ppl_">People</a>
-    <a href="index.html?pageid=cont" id="cont">Contact &amp; Funding</a>
-</div>
+    <!-- desktop navigation -->
+    <div class="topnav" id="topnavdesktop" style="display: block">
+        <a href="index.html?pageid=home" id="home">Home</a>
+        <a href="index.html?pageid=publ" id="publ">Publications</a>
+        <a href="index.html?pageid=code" id="code">Sample Codes</a>
+        <a href="index.html?pageid=vis_" id="vis_">Visualizations</a>
+        <a href="index.html?pageid=ppl_" id="ppl_">People</a>
+        <a href="index.html?pageid=cont" id="cont">Contact &amp; Funding</a>
+    </div>
 
-<!-- mobile navigation -->
-<!--div class="topnav" id="topnavmobile" style="display: block"-->
+    <!-- mobile navigation -->
+    <!--div class="topnav" id="topnavmobile" style="display: block"-->
     <!-- Navigation links (hidden by default) -->
     <!--a href="index.html?pageid=home" id="mob_home" class="active">Home</a>
     <div id="menulinks">
@@ -66,291 +67,344 @@ function setupPage()
     </a>
 </div-->
 
-<!-- main area -->
+    <!-- main area -->
 
-<!-- HOME -->
-<div class="mainarea" id="homemain">
+    <!-- HOME -->
+    <div class="mainarea" id="homemain">
 
-    <div class="title2">VTV-AMR:<br />Visualization of Time-Varying Adaptive Mesh Refinement Data</div>
-    <br />
-    <div class="title3">Project Scope</div>
-    <br />
-    <div class="text">
-Adaptive mesh refinement (AMR) is used by 3D computational fluid dynamic (CFD)
-solvers to focus the computation on interesting areas. Popular AMR codes are
-NASA's
-<a href="https://www.nas.nasa.gov/publications/articles/feature_LAVA_contributes_to_astronaut_safety.html">LAVA</a>
-fluid solver or
-<a href="https://flash.rochester.edu/site/flashcode/">FLASH</a> by the University of Rochester.
-Examples of AMR <i>topologies</i> are <a href="https://en.wikipedia.org/wiki/Octree">Octrees</a>,
-but other tree types, branching factors, shapes, etc. are possible.
-<br />
-<br />
-AMR codes virtually always store the data (density, temperature, velocities, etc.) at the "cell centers".
-For that, imagine the cell to be a small box. "Vertex-centric" methods associate the data with
-the box corners, while "cell-centric" means the data is stored at the center of the box.
-Efficient and high-quality visualizations usually have to reconstruct the data at arbitrary sample points
-and for that need to be able to quickly identify <i>rectangular</i> neighborhoods.
-<div style="text-align: center; margin-top: 20px; margin-bottom: 30px;">
-<img src="img/problem.png" width="600"/>
-</div>
-In (a), with vertex-centric data, this is simple, as when we move up/down, left/right,
-from front to back, we eventually find the <i>nearest</i> data points for the sample position
-to form a rectangular region. In (b), with cell-centric data, finding that neighborhood
-is non-obvious even in the simplest of cases, and has led to visualization packages such
-as <a href="https://www.ospray.org/">OSPRay</a> to incorporate complicated
-auxiliary data structures to perform <i>cell location</i>. Other visualization packages
-support this kind of data, but don't effectively handle the "level boundaries" where cells
-of different sizes connect, and produce cracks and other artifacts when
-<a href="https://en.wikipedia.org/wiki/Isosurface">isosurfaces</a>
-or
-<a href="https://en.wikipedia.org/wiki/Volume_rendering">volume renderings</a>
-are generated from this kind of data.
-<br />
-<br />
-In VTV-AMR, <b>our focus</b> is on crack-free visualizations with
-state-of-the-art GPU ray tracing technology to produce high-quality renderings,
-and hence we have to use the aforementioned auxiliary data structures;
-unfortunately, the memory footprint and construction times of such data
-structures are not targeted at real-time performance, nor at time-varying data
-comprised of multiple simulation time steps with adaptively changing AMR grids.
-<br />
-<br />
-<b>Our contributions</b> will advance the state-of-the-art in high-quality AMR
-data reconstruction of cell-centric data on GPUs to interactively visualize
-data sets composed of 100s to 1000s of time steps. We focus on data where even
-single time steps saturate most of the available GPU memory. For that, we build
-on state-of-the-art
-<a href="https://github.com/owl-project/owlExaBrick">software solutions</a>
-that were recently published in
-<a href="https://ieeexplore.ieee.org/document/9222372">
-leading international research journals</a>, and that we will extend to
-support time-varying data.
-<br />
-<br />
-Finally, here are some nice visualizations that we can already create with our software.
-For more of these, check out the <a href="index.html?pageid=vis_">Visualizations</a> subpage.
-<div style="text-align: center; margin-top: 20px; margin-bottom: 30px;">
-<img src="img/exajet-pathtraced_thumbnail.jpg" height="200" />
-<img src="img/cloud_thumbnail.jpg" height="200" />
-</div>
-The "<a href="https://data.nas.nasa.gov/exajet/">NASA exajet</a>" data set is courtesy Pat Moran.
-The molecular cloud data set is reused with friendly permission by Daniel Seifried with the
-Theoretical Astrophysics Group of the University of Cologne.
-<br />
-<br />
-<br />
-<br />
+        <div class="title2">VTV-AMR:<br />Visualization of Time-Varying Adaptive Mesh Refinement Data</div>
+        <br />
+        <div class="title3">Project Scope</div>
+        <br />
+        <div class="text">
+            Adaptive mesh refinement (AMR) is used by 3D computational fluid dynamic (CFD)
+            solvers to focus the computation on interesting areas. Popular AMR codes are
+            NASA's
+            <a
+                href="https://www.nas.nasa.gov/publications/articles/feature_LAVA_contributes_to_astronaut_safety.html">LAVA</a>
+            fluid solver or
+            <a href="https://flash.rochester.edu/site/flashcode/">FLASH</a> by the University of Rochester.
+            Examples of AMR <i>topologies</i> are <a href="https://en.wikipedia.org/wiki/Octree">Octrees</a>,
+            but other tree types, branching factors, shapes, etc. are possible.
+            <br />
+            <br />
+            AMR codes virtually always store the data (density, temperature, velocities, etc.) at the "cell centers".
+            For that, imagine the cell to be a small box. "Vertex-centric" methods associate the data with
+            the box corners, while "cell-centric" means the data is stored at the center of the box.
+            Efficient and high-quality visualizations usually have to reconstruct the data at arbitrary sample points
+            and for that need to be able to quickly identify <i>rectangular</i> neighborhoods.
+            <div style="text-align: center; margin-top: 20px; margin-bottom: 30px;">
+                <img src="img/problem.png" width="600" />
+            </div>
+            In (a), with vertex-centric data, this is simple, as when we move up/down, left/right,
+            from front to back, we eventually find the <i>nearest</i> data points for the sample position
+            to form a rectangular region. In (b), with cell-centric data, finding that neighborhood
+            is non-obvious even in the simplest of cases, and has led to visualization packages such
+            as <a href="https://www.ospray.org/">OSPRay</a> to incorporate complicated
+            auxiliary data structures to perform <i>cell location</i>. Other visualization packages
+            support this kind of data, but don't effectively handle the "level boundaries" where cells
+            of different sizes connect, and produce cracks and other artifacts when
+            <a href="https://en.wikipedia.org/wiki/Isosurface">isosurfaces</a>
+            or
+            <a href="https://en.wikipedia.org/wiki/Volume_rendering">volume renderings</a>
+            are generated from this kind of data.
+            <br />
+            <br />
+            In VTV-AMR, <b>our focus</b> is on crack-free visualizations with
+            state-of-the-art GPU ray tracing technology to produce high-quality renderings,
+            and hence we have to use the aforementioned auxiliary data structures;
+            unfortunately, the memory footprint and construction times of such data
+            structures are not targeted at real-time performance, nor at time-varying data
+            comprised of multiple simulation time steps with adaptively changing AMR grids.
+            <br />
+            <br />
+            <b>Our contributions</b> will advance the state-of-the-art in high-quality AMR
+            data reconstruction of cell-centric data on GPUs to interactively visualize
+            data sets composed of 100s to 1000s of time steps. We focus on data where even
+            single time steps saturate most of the available GPU memory. For that, we build
+            on state-of-the-art
+            <a href="https://github.com/owl-project/owlExaBrick">software solutions</a>
+            that were recently published in
+            <a href="https://ieeexplore.ieee.org/document/9222372">
+                leading international research journals</a>, and that we will extend to
+            support time-varying data.
+            <br />
+            <br />
+            Finally, here are some nice visualizations that we can already create with our software.
+            For more of these, check out the <a href="index.html?pageid=vis_">Visualizations</a> subpage.
+            <div style="text-align: center; margin-top: 20px; margin-bottom: 30px;">
+                <img src="img/exajet-pathtraced_thumbnail.jpg" height="200" />
+                <img src="img/cloud_thumbnail.jpg" height="200" />
+            </div>
+            The "<a href="https://data.nas.nasa.gov/exajet/">NASA exajet</a>" data set is courtesy Pat Moran.
+            The molecular cloud data set is reused with friendly permission by Daniel Seifried with the
+            Theoretical Astrophysics Group of the University of Cologne.
+            <br />
+            <br />
+            <br />
+            <br />
+
+        </div>
+    </div>
+
+    <!-- PUBLICATIONS -->
+    <div class="mainarea" id="publmain">
+        <div class="title2">Publications</div>
+        <br />
+
+        <div class="title3">Journal Papers</div>
+        <ul>
+            <li>
+                <font color="000000"><a class="ilink" href="index.html?pageid=ppl_#stefan">S. Zellmann</a>, D. Seifried,
+                    N. Morrical, I. Wald, W. Usher, J.P. Law-Smith, S. Walch-Gassner, A. Hinkenjann (2022),<br />
+                    <i>"Point Containment Queries on Ray Tracing Cores for AMR Flow Visualization".</i>
+                    <br />
+                    Computing in Science and Engineering (CiSE), Special Issue: Hardware-Accelerated Ray Tracing for
+                    Scientific Applications (Mar/Apr 2022)<br />
+                </font>
+                <a href="https://ieeexplore.ieee.org/document/9720179">Link</a>
+            </li>
+            <br />
+            <li>
+                <font color="000000">I. Wald, <a class="ilink" href="index.html?pageid=ppl_#stefan">S. Zellmann</a>, W.
+                    Usher, N. Morrical, U. Lang, V. Pascucci (2021),<br />
+                    <i>"Ray Tracing Structured AMR Data Using ExaBricks".</i>
+                    <br />
+                    IEEE Transactions on Visualization and Computer Graphics, Vol. 27 (2), 2021.<br />
+                </font>
+                <a href="https://vis.uni-koeln.de/sites/home/szellma1/exabrick-compressed.pdf">Author version</a> <a
+                    href="https://ieeexplore.ieee.org/document/9222372">Link</a>
+            </li>
+        </ul>
+
+        <div class="title3">Conference Papers (all peer-reviewed)</div>
+        <ul>
+            <li>
+                <font color="000000"><a class="ilink" href="index.html?pageid=ppl_#stefan">S. Zellmann</a>, I. Wald, J.
+                    Barbosa, S. Demirci, A. Sahistan, U. G&uuml;d&uuml;kbay (2022),<br />
+                    <i>"Hybrid Image-/Data-Parallel Rendering Using Island Parallelism".</i>
+                    <br />
+                    The 12th IEEE Symposium on Large Data Analysis and Visualization (LDAV 2022)<br />
+                </font>
+                <a href="https://vis.uni-koeln.de/sites/VIS/user_upload/islands-paper-compressed.pdf">Author version</a>
+            </li>
+            <br />
+            <li>
+                <font color="000000"><a class="ilink" href="index.html?pageid=ppl_#stefan">S. Zellmann</a>, I. Wald, A.
+                    Sahistan, M. Hellmann, W. Usher (2022),<br />
+                    <i>"Design and Evaluation of a GPU Streaming Framework for Visualizing Time-Varying AMR Data".</i>
+                    <br />
+                    <i></i> Eurographics Symposium on Parallel Graphics and Visualization (EGPGV 2022)<br />
+                </font>
+                <a href="https://vis.uni-koeln.de/sites/VIS/user_upload/paper-exajet-animated-compressed.pdf">Author
+                    version</a> <a href="https://diglib.eg.org/handle/10.2312/pgv20221066">Link</a>
+            </li>
+        </ul>
+
+        <div class="title3">Technical Reports and Pre-prints</div>
+        <ul>
+            <li>
+                <font color="000000">J. A. P. Law-Smith, R. W. Everson, E. Ramirez-Ruiz, S. E. de Mink, L. A. C. van
+                    Son, Y. Goetberg, <a class="ilink" href="index.html?pageid=ppl_#stefan">S. Zellmann</a>, A.
+                    Vigna-Gomez, M. Renzo, S. Wu, S. L. Schroder, R. J. Foley, T. Hutchinson-Smith (arXiv pre-print,
+                    under submission),<br />
+                    <i>"Successful Common Envelope Ejection and Binary Neutron Star Formation in 3D Hydrodynamics".</i>
+                    <br />
+                    Pre-print on arXiv.org<br />
+                </font>
+                <a href="https://arxiv.org/abs/2011.06630">Link (arXiv.org)</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- SAMPLE CODES -->
+    <div class="mainarea" id="codemain">
+        <div class="title2">Sample Codes</div>
+        <br />
+        Here we provide links to code fragments generated during the course of the project;
+        VTV-AMR is a <i>basic research project</i>, so that the primary output are not (and
+        cannot be) full-fledged (visualization) systems, but rather, prototypical sample
+        applications that <i>someone else</i> could potentially integrate in <i>their own</i>
+        visualization software.<br />
+        <br />
+        Whenever possible, source code generated by VTV-AMR will be
+        published under non-restrictive open source licenses such as Apache2 or MIT.
+        <br />
+        <br />
+        <div class="title3">FLASH to raw converter</div>
+        <b>Link:</b> <a href="https://github.com/vtvamr/flash2raw">https://github.com/vtvamr/flash2raw</a><br />
+        <b>Description:</b> Tool to convert from Rochester University's <a
+            href="https://flash.rochester.edu/site/flashcode/">FLASH</a> format to a
+        structured raw format that can be read by virtually any volume renderer or
+        visualization system out there; useful for validation. The tool uses a
+        two-stage process; on the first stage, we generate cell data that is
+        readable by <a href="https://github.com/owl-project/owlExaBrick">ExaBricks</a>.
+        That intermediate representation can then be resampled to a uniform grid
+        stored as a .raw file.
+        This software is primarily used (and therefore only tested) on the
+        <a href="https://rrzk.uni-koeln.de/hpc-projekte/hpc">Cheops HPC system</a> at the University of Cologne.
+        <br />
+        <br />
+        <div class="title3">ExaBrick (TVCG'21 Snapshot)</div>
+        <b>Link:</b> <a
+            href="https://github.com/owl-project/owlExaBrick">https://github.com/owl-project/owlExaBrick</a><br />
+        <b>Description:</b> Visualization prototype and data structure we presented at IEEE VIS 2020;
+        optimized for NVIDIA RTX GPUs with hardware ray tracing cores. This software
+        forms the basis for the developments in VTV-AMR. ExaBrick is based on <a
+            href="https://github.com/owl-project/owl">OWL</a> by <a href="http://www.sci.utah.edu/~wald/">Ingo Wald</a>,
+        with whom we
+        collaborate on this project.
+    </div>
+
+    <!-- VISUALIZATIONS -->
+    <div class="mainarea" id="vis_main">
+        <div class="title2">Visualizations</div>
+        <br />
+        (Pics:) Click the thumbnail images for a larger version.
+        <br />
+        <br />
+        <div class="title3">Animated Exajet</div>
+        Presented at EGPGV'22 in Rome. See the
+        <a href="index.html?pageid=publ">Publications</a> page for the conference paper.
+        Exajet (courtesy Pat Moran with NASA) has a fixed AMR grid that doesn't change over time.
+        With that, it's different than other data we focus on; this however allowed us to focus
+        on the async. streaming procedere from NVMe SSD to GPU. The scalar data of each
+        frame is 2.54 GB in size; all the renderings in the video are interactive.
+        <iframe id="youtube0" width="420" height="315" src=""></iframe>
+        <br />
+        <br />
+        <div class="title3">Particle Tracer</div>
+        This visualization was generated in 2022 during the work on our <a href="index.html?pageid=publ">CiSE paper</a>
+        on flow visualization with RT
+        cores; flow-vis is one of our milestones on the application side.
+        <table>
+            <tr>
+                <td><a href="img/vis/tracer1.jpg"><img src="img/vis/tracer1_thumbnail.jpg" width="300" /></a></td>
+                <td><a href="img/vis/tracer2.jpg"><img src="img/vis/tracer2_thumbnail.jpg" width="300" /></a></td>
+                <td><a href="img/vis/tracer3.jpg"><img src="img/vis/tracer3_thumbnail.jpg" width="300" /></a></td>
+                <td><a href="img/vis/tracer4.jpg"><img src="img/vis/tracer4_thumbnail.jpg" width="300" /></a></td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <div class="title3">Binary Neutron Star (Animation)</div>
+        This visualization was used to create (offline) animations from a FLASH simulation
+        (binary neutron star and common envelope ejection). See the arXiv pre-print on the
+        <a href="index.html?pageid=publ">Publications</a> page. Videos can be found on
+        Jamie Law-Smith's youtube channel: [<a
+            href="https://www.youtube.com/channel/UCShahcfGrj5dOZTTrOEqSOA">link</a>].
+        <table>
+            <tr>
+                <td><a href="img/vis/mask650.jpg"><img src="img/vis/mask650.jpg" width="300" /></a></td>
+                <td><a href="img/vis/mask660.jpg"><img src="img/vis/mask660.jpg" width="300" /></a></td>
+                <td><a href="img/vis/mask670.jpg"><img src="img/vis/mask670.jpg" width="300" /></a></td>
+                <td><a href="img/vis/mask690.jpg"><img src="img/vis/mask680.jpg" width="300" /></a></td>
+            </tr>
+        </table>
+
+        <br />
+        <br />
+        <div class="title3">Molecular Clouds</div>
+        Visualizations made in preparation for the original VIS paper on ExaBrick in 2020.
+        The data are courtesy Daniel Seifried who's currently with the Theoretical Astrophysics
+        Group of the University of Cologne. The simulations were generated using the
+        <a href="https://flash.rochester.edu/site/flashcode/">FLASH</a> AMR code.
+        <table>
+            <tr>
+                <td><a href="img/vis/cloud1.jpg"><img src="img/vis/cloud1_thumbnail.jpg" height="200" /></a></td>
+                <td><a href="img/vis/cloud2.jpg"><img src="img/vis/cloud2_thumbnail.jpg" height="200" /></a></td>
+            </tr>
+        </table>
+
+        <br />
+        <br />
+        <br />
+    </div>
+
+    <!-- PEOPLE -->
+    <div class="mainarea" id="ppl_main">
+        <div class="title2">People</div>
+        <br />
+        <div class="title3" style="padding-bottom: 8px" id="stefan">Principal Investigator</div>
+        <table>
+            <tr>
+                <td>
+                    <img src="img/StefanZellmann.jpg" class="profilepic" />
+                </td>
+                <td style="vertical-align: top">
+                    PD Dr. Stefan Zellmann<br />
+                    Personal website: <a
+                        href="https://pds.uni-koeln.de/people/stefan-zellmann">https://pds.uni-koeln.de/people/stefan-zellmann</a><br />
+                    Email: <a
+                        href="javascript:window.location.href = 'mailto:' + ['zellmann','uni-koeln.de'].join('@')">zellmann
+                        <!---->@
+                        <!---->uni-koeln.de
+                    </a>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <div class="title3" style="padding-bottom: 8px">Students</div>
+        <table>
+            <tr>
+                <td>
+                    <img src="img/JingwenYi.jpg" class="profilepic" />
+                </td>
+                <td style="vertical-align: top">
+                    Jingwen Yi<br />
+
+                    Email: <a
+                        href="javascript:window.location.href = 'mailto:' + ['j.yi','uni-koeln.de'].join('@')">j.yi
+                        <!---->@
+                        <!---->uni-koeln.de
+                    </a>
+                </td>
+            </tr>
+        </table>
+        <br />
+        Coming soon...
 
     </div>
-</div>
 
-<!-- PUBLICATIONS -->
-<div class="mainarea" id="publmain">
-    <div class="title2">Publications</div>
-    <br />
-
-    <div class="title3">Journal Papers</div>
-    <ul>
-    <li>
-    <font color="000000"><a class="ilink" href="index.html?pageid=ppl_#stefan">S. Zellmann</a>, D. Seifried, N. Morrical, I. Wald, W. Usher, J.P. Law-Smith, S. Walch-Gassner, A. Hinkenjann (2022),<br />
-    <i>"Point Containment Queries on Ray Tracing Cores for AMR Flow Visualization".</i>
-    <br />
-    Computing in Science and Engineering (CiSE), Special Issue: Hardware-Accelerated Ray Tracing for Scientific Applications (Mar/Apr 2022)<br />
-    </font>
-    <a href="https://ieeexplore.ieee.org/document/9720179">Link</a>
-    </li>
-    <br />
-    <li>
-    <font color="000000">I. Wald, <a class="ilink" href="index.html?pageid=ppl_#stefan">S. Zellmann</a>, W. Usher, N. Morrical, U. Lang, V. Pascucci (2021),<br />
-    <i>"Ray Tracing Structured AMR Data Using ExaBricks".</i>
-    <br />
-    IEEE Transactions on Visualization and Computer Graphics, Vol. 27 (2), 2021.<br />
-    </font>
-    <a href="https://vis.uni-koeln.de/sites/home/szellma1/exabrick-compressed.pdf">Author version</a> <a href="https://ieeexplore.ieee.org/document/9222372">Link</a>
-    </li>
-    </ul>
-
-    <div class="title3">Conference Papers (all peer-reviewed)</div>
-    <ul>
-    <li>
-    <font color="000000"><a class="ilink" href="index.html?pageid=ppl_#stefan">S. Zellmann</a>, I. Wald, J. Barbosa, S. Demirci, A. Sahistan, U. G&uuml;d&uuml;kbay (2022),<br />
-    <i>"Hybrid Image-/Data-Parallel Rendering Using Island Parallelism".</i>
-    <br />
-    The 12th IEEE Symposium on Large Data Analysis and Visualization (LDAV 2022)<br />
-    </font>
-    <a href="https://vis.uni-koeln.de/sites/VIS/user_upload/islands-paper-compressed.pdf">Author version</a>
-    </li>
-    <br />
-    <li>
-    <font color="000000"><a class="ilink" href="index.html?pageid=ppl_#stefan">S. Zellmann</a>, I. Wald, A. Sahistan, M. Hellmann, W. Usher (2022),<br />
-    <i>"Design and Evaluation of a GPU Streaming Framework for Visualizing Time-Varying AMR Data".</i>
-    <br />
-    <i></i> Eurographics Symposium on Parallel Graphics and Visualization (EGPGV 2022)<br />
-    </font>
-    <a href="https://vis.uni-koeln.de/sites/VIS/user_upload/paper-exajet-animated-compressed.pdf">Author version</a> <a href="https://diglib.eg.org/handle/10.2312/pgv20221066">Link</a>
-    </li>
-    </ul>
-
-    <div class="title3">Technical Reports and Pre-prints</div>
-    <ul>
-    <li>
-    <font color="000000">J. A. P. Law-Smith, R. W. Everson, E. Ramirez-Ruiz, S. E. de Mink, L. A. C. van Son, Y. Goetberg, <a class="ilink" href="index.html?pageid=ppl_#stefan">S. Zellmann</a>, A. Vigna-Gomez, M. Renzo, S. Wu, S. L. Schroder, R. J. Foley, T. Hutchinson-Smith (arXiv pre-print, under submission),<br />
-    <i>"Successful Common Envelope Ejection and Binary Neutron Star Formation in 3D Hydrodynamics".</i>
-    <br />
-    Pre-print on arXiv.org<br />
-    </font>
-    <a href="https://arxiv.org/abs/2011.06630">Link (arXiv.org)</a>
-    </li>
-    </ul>
-</div>
-
-<!-- SAMPLE CODES -->
-<div class="mainarea" id="codemain">
-    <div class="title2">Sample Codes</div>
-    <br />
-Here we provide links to code fragments generated during the course of the project;
-VTV-AMR is a <i>basic research project</i>, so that the primary output are not (and
-cannot be) full-fledged (visualization) systems, but rather, prototypical sample
-applications that <i>someone else</i> could potentially integrate in <i>their own</i>
-visualization software.<br />
-<br />
-Whenever possible, source code generated by VTV-AMR will be
-published under non-restrictive open source licenses such as Apache2 or MIT.
-    <br />
-    <br />
-    <div class="title3">FLASH to raw converter</div>
-<b>Link:</b> <a href="https://github.com/vtvamr/flash2raw">https://github.com/vtvamr/flash2raw</a><br />
-<b>Description:</b> Tool to convert from Rochester University's <a
-href="https://flash.rochester.edu/site/flashcode/">FLASH</a> format to a
-structured raw format that can be read by virtually any volume renderer or
-visualization system out there; useful for validation. The tool uses a
-two-stage process; on the first stage, we generate cell data that is
-readable by <a href="https://github.com/owl-project/owlExaBrick">ExaBricks</a>.
-That intermediate representation can then be resampled to a uniform grid
-stored as a .raw file.
-This software is primarily used (and therefore only tested) on the
-<a href="https://rrzk.uni-koeln.de/hpc-projekte/hpc">Cheops HPC system</a> at the University of Cologne.
-    <br />
-    <br />
-    <div class="title3">ExaBrick (TVCG'21 Snapshot)</div>
-<b>Link:</b> <a href="https://github.com/owl-project/owlExaBrick">https://github.com/owl-project/owlExaBrick</a><br />
-<b>Description:</b> Visualization prototype and data structure we presented at IEEE VIS 2020;
-optimized for NVIDIA RTX GPUs with hardware ray tracing cores.  This software
-forms the basis for the developments in VTV-AMR. ExaBrick is based on <a
-href="https://github.com/owl-project/owl">OWL</a> by <a href="http://www.sci.utah.edu/~wald/">Ingo Wald</a>, with whom we
-collaborate on this project.
-</div>
-
-<!-- VISUALIZATIONS -->
-<div class="mainarea" id="vis_main">
-    <div class="title2">Visualizations</div>
-    <br />
-    (Pics:) Click the thumbnail images for a larger version.
-    <br />
-    <br />
-    <div class="title3">Animated Exajet</div>
-Presented at EGPGV'22 in Rome. See the
-<a href="index.html?pageid=publ">Publications</a> page for the conference paper.
-Exajet (courtesy Pat Moran with NASA) has a fixed AMR grid that doesn't change over time.
-With that, it's different than other data we focus on; this however allowed us to focus
-on the async. streaming procedere from NVMe SSD to GPU. The scalar data of each
-frame is 2.54 GB in size; all the renderings in the video are interactive.
-    <iframe id="youtube0" width="420" height="315" src=""></iframe>
-    <br />
-    <br />
-    <div class="title3">Particle Tracer</div>
-This visualization was generated in 2022 during the work on our <a
-href="index.html?pageid=publ">CiSE paper</a> on flow visualization with RT
-cores; flow-vis is one of our milestones on the application side.
-<table><tr>
-<td><a href="img/vis/tracer1.jpg"><img src="img/vis/tracer1_thumbnail.jpg" width="300" /></a></td>
-<td><a href="img/vis/tracer2.jpg"><img src="img/vis/tracer2_thumbnail.jpg" width="300" /></a></td>
-<td><a href="img/vis/tracer3.jpg"><img src="img/vis/tracer3_thumbnail.jpg" width="300" /></a></td>
-<td><a href="img/vis/tracer4.jpg"><img src="img/vis/tracer4_thumbnail.jpg" width="300" /></a></td>
-</tr></table>
-    <br />
-    <br />
-    <div class="title3">Binary Neutron Star (Animation)</div>
-This visualization was used to create (offline) animations from a FLASH simulation
-(binary neutron star and common envelope ejection). See the arXiv pre-print on the
-<a href="index.html?pageid=publ">Publications</a> page. Videos can be found on
-Jamie Law-Smith's youtube channel: [<a href="https://www.youtube.com/channel/UCShahcfGrj5dOZTTrOEqSOA">link</a>].
-<table><tr>
-<td><a href="img/vis/mask650.jpg"><img src="img/vis/mask650.jpg" width="300" /></a></td>
-<td><a href="img/vis/mask660.jpg"><img src="img/vis/mask660.jpg" width="300" /></a></td>
-<td><a href="img/vis/mask670.jpg"><img src="img/vis/mask670.jpg" width="300" /></a></td>
-<td><a href="img/vis/mask690.jpg"><img src="img/vis/mask680.jpg" width="300" /></a></td>
-</tr></table>
-
-    <br />
-    <br />
-    <div class="title3">Molecular Clouds</div>
-Visualizations made in preparation for the original VIS paper on ExaBrick in 2020.
-The data are courtesy Daniel Seifried who's currently with the Theoretical Astrophysics
-Group of the University of Cologne. The simulations were generated using the
-<a href="https://flash.rochester.edu/site/flashcode/">FLASH</a> AMR code.
-<table><tr>
-<td><a href="img/vis/cloud1.jpg"><img src="img/vis/cloud1_thumbnail.jpg" height="200" /></a></td>
-<td><a href="img/vis/cloud2.jpg"><img src="img/vis/cloud2_thumbnail.jpg" height="200" /></a></td>
-</tr></table>
-
-<br />
-<br />
-<br />
-</div>
-
-<!-- PEOPLE -->
-<div class="mainarea" id="ppl_main">
-    <div class="title2">People</div>
-    <br />
-    <div class="title3" style="padding-bottom: 8px" id="stefan">Principal Investigator</div>
-    <table><tr><td>
-    <img src="img/StefanZellmann.jpg" class="profilepic" /></td>
-    <td style="vertical-align: top">
-    PD Dr. Stefan Zellmann<br />
-    Personal website: <a href="https://pds.uni-koeln.de/people/stefan-zellmann">https://pds.uni-koeln.de/people/stefan-zellmann</a><br />
-    Email: <a href="javascript:window.location.href = 'mailto:' + ['zellmann','uni-koeln.de'].join('@')">zellmann<!---->@<!---->uni-koeln.de</a>
-    </td>
-    </tr></table>
-    <br />
-    <br />
-    <div class="title3" style="padding-bottom: 8px">Students</div>
-    Coming soon...
-
-</div>
-
-<!-- CONTACT -->
-<div class="mainarea" id="contmain">
-    <div class="title2">
-        Contact
+    <!-- CONTACT -->
+    <div class="mainarea" id="contmain">
+        <div class="title2">
+            Contact
+        </div>
+        <br />
+        For more information about this project, or to get in touch, shoot a message to:
+        <br />
+        <br />
+        Stefan Zellmann (PhD)<br />
+        University of Cologne, Parallel and Distributed Systems (<a href="https://pds.uni-koeln.de">Stefan Wesner's
+            chair</a>)<br />
+        Weyertal 121<br />
+        50931 Cologne (GER)<br />
+        Email: <a href="javascript:window.location.href = 'mailto:' + ['zellmann','uni-koeln.de'].join('@')">zellmann
+            <!---->@
+            <!---->uni-koeln.de
+        </a>
+        <br />
+        <br />
+        <br />
+        <div class="title2">
+            Funding
+        </div>
+        <br />
+        This project is supported by the German Research Foundation (DFG), under Grant No. 456842964.<br />
+        More information can be found under this [<a
+            href="https://gepris.dfg.de/gepris/projekt/456842964?context=projekt&task=showDetail&id=456842964&">link</a>].
     </div>
-    <br />
-    For more information about this project, or to get in touch, shoot a message to:
-    <br />
-    <br />
-    Stefan Zellmann (PhD)<br />
-    University of Cologne, Parallel and Distributed Systems (<a href="https://pds.uni-koeln.de">Stefan Wesner's chair</a>)<br />
-    Weyertal 121<br />
-    50931 Cologne (GER)<br />
-    Email: <a href="javascript:window.location.href = 'mailto:' + ['zellmann','uni-koeln.de'].join('@')">zellmann<!---->@<!---->uni-koeln.de</a>
-    <br />
-    <br />
-    <br />
-    <div class="title2">
-        Funding
+
+    <div class="footer" id="footer">
+        VTV-AMR is funded by the DFG (2022-2025), under Grant No.
+        <a href="https://gepris.dfg.de/gepris/projekt/456842964?context=projekt&task=showDetail&id=456842964&"
+            style="color:white">456842964</a>
     </div>
-    <br />
-    This project is supported by the German Research Foundation (DFG), under Grant No. 456842964.<br />
-    More information can be found under this [<a href="https://gepris.dfg.de/gepris/projekt/456842964?context=projekt&task=showDetail&id=456842964&">link</a>].
-</div>
 
-<div class="footer" id="footer">
-VTV-AMR is funded by the DFG (2022-2025), under Grant No.
-<a href="https://gepris.dfg.de/gepris/projekt/456842964?context=projekt&task=showDetail&id=456842964&" style="color:white">456842964</a>
-</div>
-
-<!--</div>  mobile container -->
+    <!--</div>  mobile container -->
 
 </body>
+
 </html>
