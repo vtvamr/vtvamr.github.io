@@ -76,11 +76,26 @@
 
         <div class="title2">VTV-AMR:<br />Visualization of Time-Varying Adaptive Mesh Refinement Data</div>
         <br />
+        <div style="text-align: center; margin-top: 20px; margin-bottom: 30px;">
+            <img src="img/exajet-pathtraced_thumbnail.jpg" height="200" />
+            <img src="img/cloud_thumbnail.jpg" height="200" />
+        </div>
+        <div style="text-align: left; font-size: medium">
+          <b>Figure 1.</b> <i>AMR data sets visualized with tools developed
+          during the course of this project.  Left: NASA's exajet data set, a
+          large tree-based AMR data set, path traced using multiple scattering
+          on an RTX GPU. Right: molecular cloud data set rendered with emission
+          and absorption.  Both data sets have complex AMR hierarchies and are
+          time-dependent, making this particularly challenging to render on
+          GPUs.</i>
+        </div>
+        <br />
         <div class="title3">Project Scope</div>
         <br />
         <div class="text">
             Adaptive mesh refinement (AMR) is used by 3D computational fluid dynamic (CFD)
-            solvers to focus the computation on interesting regions in space (and time). Popular AMR codes are
+            solvers to focus the computation on interesting regions in space (and time). Popular AMR codes 
+            that were, e.g., used to produce the two data sets in Fig. 1 are
             NASA's
             <a
                 href="https://www.nas.nasa.gov/publications/articles/feature_LAVA_contributes_to_astronaut_safety.html">LAVA</a>
@@ -98,9 +113,17 @@
             <div style="text-align: center; margin-top: 20px; margin-bottom: 30px;">
                 <img src="img/problem.png" width="600" />
             </div>
-            In (a), with vertex-centric data, this is simple, as when we move up/down, left/right,
+            <div style="text-align: left; font-size: medium">
+            <b>Figure 2.</b> <i>The main challenge with the data we focus on is
+            interpolation at level boundaries. While this is trivial when the
+            data is vertex-centric (a), challenges arise with cell-centric data
+            (b). Virtually all AMR codes of interest generate cell-centric
+            data.</i>
+            </div>
+            <br />
+            In Fig. 2 (a), with vertex-centric data, this is simple, as when we move up/down, left/right,
             from front to back, we eventually find the <i>nearest</i> data points for the sample position
-            to form a rectangular region. In (b), with cell-centric data, finding that neighborhood
+            to form a rectangular region. In Fig. 2 (b), with cell-centric data, finding that neighborhood
             is non-obvious even in the simplest of cases, and has led to visualization packages such
             as <a href="https://www.ospray.org/">OSPRay</a> to incorporate complicated
             auxiliary data structures to perform <i>cell location</i>. Other visualization packages
@@ -132,15 +155,10 @@
             support time-varying data.
             <br />
             <br />
-            Finally, here are some nice visualizations that we can already create with our software.
-            For more of these, check out the <a href="index.html?pageid=vis_">Visualizations</a> subpage.
-            <div style="text-align: center; margin-top: 20px; margin-bottom: 30px;">
-                <img src="img/exajet-pathtraced_thumbnail.jpg" height="200" />
-                <img src="img/cloud_thumbnail.jpg" height="200" />
-            </div>
             The "<a href="https://data.nas.nasa.gov/exajet/">NASA exajet</a>" data set is courtesy Pat Moran.
             The molecular cloud data set is reused with friendly permission by Daniel Seifried with the
-            Theoretical Astrophysics Group of the University of Cologne.
+            Theoretical Astrophysics Group of the University of Cologne. For more visualizations, check out
+            the <a href="index.html?pageid=vis_">Visualizations</a> subpage.
             <br />
             <br />
             <br />
