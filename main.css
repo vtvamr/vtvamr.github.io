@@ -127,6 +127,10 @@ a:active:not(.topnav a):active {
   height: 160px;
 }
 
+.teaserpic {
+  width: 700px;
+}
+
 .mainarea {
   position: absolute;
   margin: 40px;
